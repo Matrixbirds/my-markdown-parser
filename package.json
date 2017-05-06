@@ -1,0 +1,14 @@
+{
+  "name": "my-markdown-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Matrixbirds/my-markdown-parser",
+  "author": "matrixbirds <yooobuntu@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha -u bdd ./spec"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0"
+  }
+}
