@@ -1,11 +1,11 @@
 'use strict';
 const assert = require('assert');
-const Render = require("../core/concerns/render");
+const {Parser} = require("../core");
 
-describe("Render", function() {
+describe("Parser", function() {
   describe("#parse", function() {
     context("with valid tokens", function() {
-      const render = new Render([
+      const parser = new Parser([
         {
           type: 'newline',
         },
@@ -28,7 +28,7 @@ describe("Render", function() {
           text: 'Text2'
         }
       ]);
-      const res = render.parse();
+      const res = parser.parse();
       it ("res is not empty", function() {
         assert(res.length, 'is empty');
       })

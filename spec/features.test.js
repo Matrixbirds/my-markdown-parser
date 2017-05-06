@@ -4,18 +4,16 @@ const assert = require('assert');
 
 const [fs, path] = [require('fs'), require('path')];
 
-const Render = require("../core/concerns/render");
-const {Lexical} = require('../core');
+const {Parser, Lexical} = require("../core");
 
 const data = fs.readFileSync(path.join(__dirname, '../doc/basic-syntax.md')).toString();
-
 
 describe('my-markdown-parser', function() {
   describe('parser', function() {
     const lexcial = new Lexical(data);
     lexcial.parse();
-    const render = new Render(lexcial._tokens);
-    const res = render.parse();
+    const parser = new Parser(lexcial._tokens);
+    const res = parser.parse();
     const expect = [
       '<h1>h1</h1>',
       '<h2>h2</h2>',
