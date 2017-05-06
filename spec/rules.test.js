@@ -82,5 +82,15 @@ describe("Rules", function() {
         })
       });
     });
-  })
+  });
+
+  describe(".text", function() {
+    it("truthly", function() {
+      assert(Rules.text.exec("test text\n"), 'regex exec fail');
+      assert(Rules.text.exec("test text\n")[0] === "test text", 'not eq');
+    });
+    it("falsy ", function() {
+      assert(!Rules.text.exec("\n"), 'regex exec fail');
+    });
+  });
 });
