@@ -34,7 +34,6 @@ describe("Render", function() {
       })
       it ("should be expect str", function() {
         const expect = [
-          '<br/>',
           '<h1>Header1</h1>',
           '<h2>Header2</h2>',
           '<p>Text1</p>',

@@ -13,7 +13,7 @@ Render.prototype.parse = function () {
     this.res.push(this[this.token.type]());
     this.tokens.shift();
   }
-  return this.res.join("\n");
+  return this.res.filter(s => s).join('\n');
 };
 let val;
 Object.defineProperty(Render.prototype, 'token', {
@@ -31,7 +31,7 @@ Render.prototype.header = function () {
 }
 
 Render.prototype.newline = function () {
-  return '<br/>';
+  return '';
 }
 
 Render.prototype.text = function() {
