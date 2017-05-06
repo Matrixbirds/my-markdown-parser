@@ -8,23 +8,32 @@ function Lexical(src, config) {
 Lexical.prototype.parse = function() {
   let src = this._src;
   const rules = this._rules;
+  var char;
 
   while (src) {
-    console.log(char);
     if (char = rules.newline.exec(src)) {
-      this.tokens.push({
+      this._tokens.push({
         type: 'newline'
       });
-      char = char.substring(char[0].length) //offset
+      src = src.substring(char[0].length) //offset
     }
 
     if (char = rules.header.exec(src)) {
-      this.tokens.push({
+      this._tokens.push({
         type: 'header',
         level: char[1].length,
         text: char[2],
       });
-      char = char.substring(char[0].length);
+      src = src.substring(char[0].length);
+      continue;
+    }
+
+    if (char = rules.text.exec(src)) {
+      this._tokens.push({
+        type: 'text',
+        text: char[0]
+      });
+      src = src.substring(char[0].length);
       continue;
     }
   }
