@@ -21,6 +21,8 @@ describe('my-markdown-parser', function() {
       '<p>  2048</p>',
       '<h6>h6</h6>',
       '<p>  1024 2048</p>',
+      '<a href="http://t66y.com">1024</a>',
+      '<h3><a href="http://t66y.com">1024++</a></h3>'
     ].join("\n");
     it ('should eq expect', function() {
       const util = require("util");

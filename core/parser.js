@@ -37,4 +37,14 @@ Parser.prototype.text = function() {
   const {text} = this.token;
   return `<p>${text}</p>`;
 }
+
+Parser.prototype.link = function() {
+  const {link, text} = this.token;
+  return `<a href="${link}">${text}</a>`;
+}
+
+Parser.prototype.header_link = function() {
+  const {header, link} = this.token;
+  return `<h${header.level}><a href="${link.link}">${link.text}</a></h${header.level}>`;
+}
 module.exports = Parser;

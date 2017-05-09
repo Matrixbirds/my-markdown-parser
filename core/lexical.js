@@ -6,7 +6,8 @@ function Lexical(src, config) {
   this._rules = require('./concerns/rules');
 };
 Lexical.prototype.parse = function() {
-  let src = this._src;
+  let src = this._src,
+      link;
   const rules = this._rules;
   var char;
 
@@ -19,10 +20,34 @@ Lexical.prototype.parse = function() {
     }
 
     if (char = rules.header.exec(src)) {
+      if (link = rules.link.exec(char[2])) {
+        this._tokens.push({
+          type: 'header_link',
+          header: {
+            level: char[1].length
+          },
+          link: {
+            text: link[1],
+            link: link[2]
+          }
+        })
+      }
+      else {
+        this._tokens.push({
+          type: 'header',
+          level: char[1].length,
+          text: char[2],
+        });
+      }
+      src = src.substring(char[0].length);
+      continue;
+    }
+
+    if (char = rules.link.exec(src)) {
       this._tokens.push({
-        type: 'header',
-        level: char[1].length,
-        text: char[2],
+        type: 'link',
+        text: char[1],
+        link: char[2]
       });
       src = src.substring(char[0].length);
       continue;

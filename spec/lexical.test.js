@@ -23,9 +23,11 @@ describe("Lexcial", function() {
       const lex = new Lexical(data);
       lex.parse();
       it ("three headers", function() {
+        console.log(lex._tokens);
         assert(lex._tokens.filter(t => t.type == 'header').length == 3, 'not eq 3');
       });
       it ("three text", function() {
+        console.log(lex._tokens);
         assert(lex._tokens.filter(t => t.type == 'text').length == 3, 'not eq 3');
       })
     })
