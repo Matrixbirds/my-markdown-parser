@@ -93,4 +93,26 @@ describe("Rules", function() {
       assert(!Rules.text.exec("\n"), 'regex exec fail');
     });
   });
+
+  describe(".link", function() {
+    context("truthly case", function() {
+      it("case 1", function() {
+        assert(Rules.link.exec("[a](http://foo.com)\n"), 'regext exec fail');
+        assert(Rules.link.exec("[a](http://foo.com)\n")[0] === "[a](http://foo.com)\n", 'not eq');
+        assert(Rules.link.exec("[a](http://foo.com)\n")[1] === "a", 'not eq');
+        assert(Rules.link.exec("[a](http://foo.com)\n")[2] === "http://foo.com", 'not eq');
+      });
+      it("case 2", function() {
+        assert(Rules.link.exec("[[a]]([http://foo.com])\n"), 'regext exec fail');
+        assert(Rules.link.exec("[[a]]([http://foo.com])\n")[0] === "[[a]]([http://foo.com])\n", 'not eq');
+        assert(Rules.link.exec("[[a]]([http://foo.com])\n")[1] === "[a]", 'not eq');
+        assert(Rules.link.exec("[[a]]([http://foo.com])\n")[2] === "[http://foo.com]", 'not eq');
+      });
+    })
+    it("falsy", function() {
+      assert(Rules.link.exec("[](http://foo.com)") == null, 'not null');
+      assert(Rules.link.exec("[]()") == null, 'not null');
+      assert(Rules.link.exec("[x]()") == null, 'not null');
+    });
+  })
 });
